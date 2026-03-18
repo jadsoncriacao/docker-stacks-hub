@@ -1,0 +1,21 @@
+services:
+  headscale:
+    image: headscale/headscale:latest
+    container_name: headscale
+    restart: unless-stopped
+    command: headscale serve
+    volumes:
+      - ./config.yaml:/etc/headscale/config.yaml
+      - headscale_data:/var/lib/headscale
+
+    ports:
+      - "8082:8080"
+    networks:
+      - local-network
+
+volumes:
+  headscale_data:
+
+networks:
+  local-network:
+    external: true

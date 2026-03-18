@@ -1,0 +1,21 @@
+services:
+  webui:
+    image: ghcr.io/open-webui/open-webui:latest
+    container_name: open-webui
+    restart: unless-stopped
+    ports:
+      - "${WEBUI_PORT}:8080"
+    environment:
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL}
+    networks:
+      - local-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.open-webui.rule=Host(`ai.localhost`)"
+      - "traefik.http.routers.open-webui.entrypoints=websecure"
+      - "traefik.http.routers.open-webui.tls=true"
+      - "traefik.http.services.open-webui.loadbalancer.server.port=8080"
+
+networks:
+  local-network:
+    external: true

@@ -1,0 +1,30 @@
+# Headscale Configuration Template
+server_url: http://localhost:8082
+listen_addr: 0.0.0.0:8080
+metrics_listen_addr: 0.0.0.0:9090
+grpc_listen_addr: 0.0.0.0:50443
+grpc_allow_insecure: false
+private_key_path: /var/lib/headscale/private.key
+noise:
+  private_key_path: /var/lib/headscale/noise_private.key
+ip_prefixes:
+  - 100.64.0.0/10
+derp:
+  server:
+    enabled: false
+  urls:
+    - https://controlplane.tailscale.com/derpmap/default
+  paths: []
+  auto_update_enabled: true
+  update_frequency: 24h
+database:
+  type: sqlite3
+  sqlite:
+    path: /var/lib/headscale/db.sqlite
+dns_config:
+  magic_dns: true
+  base_domain: example.com
+  nameservers:
+    - 1.1.1.1
+log:
+  level: info

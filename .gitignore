@@ -1,0 +1,13 @@
+# Docker
+.env
+*/.env
+*/data/
+*/volumes/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# SQL Server backups (montados via bind mount)
+dev/database/sqlserver/backups/
+dev/database/sqlserver/backups/**/*.bak
